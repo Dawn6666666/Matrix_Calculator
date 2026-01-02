@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>矩阵运算（精确分数）</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-text">
+        <h1>矩阵运算器</h1>
+        <p>纯前端，精确分数计算。支持行列式、逆矩阵、秩、乘法、幂、解方程组等。</p>
+      </div>
+      <div class="hero-badge">Exact Rational</div>
+    </header>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>输入矩阵</h2>
+        <div class="hint">行用换行或分号分隔，列用空格或逗号分隔。支持整数 / 分数 / 小数。</div>
+      </div>
+
+      <div class="grid">
+        <div class="field">
+          <label for="matrixA">矩阵 A</label>
+          <textarea id="matrixA" placeholder="示例：
+1 0 1
+2 1 0
+-3 2 -5"></textarea>
+        </div>
+        <div class="field">
+          <label for="matrixB">矩阵 B / 向量 b</label>
+          <textarea id="matrixB" placeholder="示例：
+1
+2
+3"></textarea>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="control">
+          <label for="operation">运算</label>
+          <select id="operation">
+            <option value="add">A + B</option>
+            <option value="sub">A - B</option>
+            <option value="mul">A × B</option>
+            <option value="transpose">Aᵀ</option>
+            <option value="det">det(A)</option>
+            <option value="inv">A⁻¹</option>
+            <option value="adj">adj(A)</option>
+            <option value="rank">rank(A)</option>
+            <option value="rref">A 的行最简式</option>
+            <option value="rref_aug">增广矩阵 (A|B) 的行最简式</option>
+            <option value="pow">A^n</option>
+            <option value="solve">解 A x = b</option>
+          </select>
+        </div>
+        <div class="control" id="powerWrap">
+          <label for="power">n（整数，可负）</label>
+          <input id="power" type="text" value="2" />
+        </div>
+        <button id="compute" class="primary">计算</button>
+      </div>
+    </section>
+
+    <section class="panel result">
+      <div class="panel-head">
+        <h2>结果</h2>
+        <div class="result-actions">
+          <button id="copyLatex" class="ghost">复制 LaTeX</button>
+        </div>
+        <div class="hint" id="resultHint">输出以分数形式显示，支持 Markdown + LaTeX 渲染。</div>
+      </div>
+      <div id="resultError" class="result-error"></div>
+      <div id="resultBody" class="result-body"></div>
+      <div id="resultRender" class="result-render"></div>
+      <pre id="latexOutput" class="result-text"></pre>
+    </section>
+
+    <footer class="footer">
+      <span>提示：小数会按十进制精确转分数（例如 0.1 -> 1/10）。</span>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@14/dist/markdown-it.min.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
